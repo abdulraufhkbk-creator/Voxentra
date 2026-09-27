@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body { width: 340px; background: #000; color: #fff; font-family: system-ui, sans-serif; margin: 0; padding: 0; }
+    .header { padding: 16px; border-bottom: 1px solid #27272a; display: flex; align-items: center; gap: 8px; }
+    .logo { width: 28px; height: 28px; background: #fff; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: #000; font-weight: bold; font-size: 14px; }
+    .content { padding: 16px; }
+    .card { background: #18181b; border: 1px solid #27272a; border-radius: 8px; padding: 12px; margin-bottom: 12px; }
+    .badge { display: inline-flex; padding: 2px 8px; border-radius: 9999px; font-size: 10px; font-weight: 700; }
+    .badge-demo { background: #065f46; color: #10b981; }
+    .btn { width: 100%; padding: 10px; background: #fff; color: #000; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; margin-top: 8px; }
+    .btn-outline { background: transparent; color: #fff; border: 1px solid #27272a; }
+    .stat { display: flex; justify-content: space-between; font-size: 12px; padding: 6px 0; border-bottom: 1px solid #27272a; }
+    .stat:last-child { border: none; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo">V</div>
+    <div>
+      <div style="font-weight:700;font-size:14px;">VOXENTRA</div>
+      <div style="font-size:10px;color:#71717a;">NTRO • SIH26152 • Demo Mode</div>
+    </div>
+    <span class="badge badge-demo" style="margin-left:auto;">LIVE</span>
+  </div>
+  <div class="content">
+    <div class="card">
+      <div style="font-size:11px;color:#a1a1aa;letter-spacing:0.1em;">CURRENT PAGE ANALYSIS</div>
+      <div id="page-stats" style="margin-top:8px;">
+        <div class="stat"><span>Posts detected</span><span id="post-count">-</span></div>
+        <div class="stat"><span>Threats flagged</span><span id="threat-count">-</span></div>
+        <div class="stat"><span>Bot probability avg</span><span id="bot-avg">-</span></div>
+      </div>
+    </div>
+    <div class="card">
+      <div style="font-size:11px;color:#a1a1aa;letter-spacing:0.1em;">THREAT INTEL</div>
+      <p style="font-size:12px;color:#d4d4d8;margin-top:6px;">Extension injects threat badges on Twitter/X and Reddit posts using local heuristics + Voxentra API (localhost:3000).</p>
+      <p style="font-size:10px;color:#71717a;margin-top:8px;">Demo Mode: No real API keys. For production, configure VOXENTRA_API in background.js</p>
+    </div>
+    <button class="btn" id="open-dashboard">Open Voxentra Console</button>
+    <button class="btn btn-outline" id="analyze-page">Re-analyze Page</button>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>

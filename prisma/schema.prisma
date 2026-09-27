@@ -1,0 +1,80 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String
+  password  String
+  role      String   @default("analyst") // analyst, admin, investigator
+  createdAt DateTime @default(now())
+  investigations Investigation[]
+}
+
+model SocialPost {
+  id          String   @id @default(cuid())
+  platform    String   // twitter, reddit, instagram, telegram
+  author      String
+  authorId    String
+  content     String
+  timestamp   DateTime @default(now())
+  likes       Int      @default(0)
+  shares      Int      @default(0)
+  comments    Int      @default(0)
+  sentiment   String?  // positive, negative, neutral, mixed
+  sentimentScore Float?
+  toxicity    Float?   // 0-1
+  threatLevel String?  // low, medium, high, critical
+  isBot       Boolean  @default(false)
+  botScore    Float?   // 0-1 probability
+  hashtags    String?  // JSON array string
+  keywords    String?  // JSON array string
+  location    String?
+  language    String   @default("en")
+  url         String?
+  rawData     String?  // JSON string for original
+  createdAt   DateTime @default(now())
+
+  @@index([platform])
+  @@index([timestamp])
+  @@index([threatLevel])
+}
+
+model Investigation {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  status      String   @default("open") // open, in_progress, closed, escalated
+  priority    String   @default("medium")
+  tags        String?  // JSON
+  createdBy   String
+  assignee    User?    @relation(fields: [createdBy], references: [id])
+  posts       String?  // JSON array of post IDs
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Alert {
+  id          String   @id @default(cuid())
+  type        String   // threat, bot_spike, sentiment_shift, viral
+  title       String
+  description String
+  severity    String   // low, medium, high, critical
+  metadata    String?  // JSON
+  isRead      Boolean  @default(false)
+  createdAt   DateTime @default(now())
+}
+
+model KeywordTrack {
+  id        String   @id @default(cuid())
+  keyword   String   @unique
+  category  String   @default("general")
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+}

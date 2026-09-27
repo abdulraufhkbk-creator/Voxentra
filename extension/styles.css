@@ -1,0 +1,18 @@
+.voxentra-badge {
+  font-family: system-ui, -apple-system, sans-serif !important;
+  z-index: 9999;
+  animation: voxentra-fadein 0.3s ease;
+}
+
+@keyframes voxentra-fadein {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.voxentra-badge-threat-critical {
+  border-left: 3px solid #dc2626 !important;
+}
+
+.voxentra-badge-threat-high {
+  border-left: 3px solid #f97316 !important;
+}

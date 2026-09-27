@@ -1,0 +1,29 @@
+version: '3.8'
+services:
+  voxentra:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - DATABASE_URL=file:./dev.db
+      - JWT_SECRET=voxentra-super-secret-jwt-key-change-in-production-32chars-min-32
+      - DEMO_MODE=true
+      - NODE_ENV=production
+    volumes:
+      - ./prisma:/app/prisma
+    restart: unless-stopped
+
+  # Optional Postgres for production
+  # postgres:
+  #   image: postgres:15
+  #   environment:
+  #     POSTGRES_DB: voxentra
+  #     POSTGRES_USER: voxentra
+  #     POSTGRES_PASSWORD: voxentra_secure
+  #   ports:
+  #     - "5432:5432"
+  #   volumes:
+  #     - pgdata:/var/lib/postgresql/data
+
+# volumes:
+#   pgdata:

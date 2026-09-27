@@ -1,0 +1,32 @@
+{
+  "manifest_version": 3,
+  "name": "Voxentra — See beyond the feed",
+  "version": "1.0.0",
+  "description": "NTRO Social Media Analytics: On-page threat, bot, and sentiment detection for Twitter/X, Reddit, Telegram",
+  "permissions": ["storage", "activeTab", "scripting"],
+  "host_permissions": ["https://*.twitter.com/*", "https://*.x.com/*", "https://*.reddit.com/*", "https://*.telegram.org/*", "http://localhost:3000/*"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icon16.png",
+      "48": "icon48.png",
+      "128": "icon128.png"
+    }
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://*.twitter.com/*", "https://*.x.com/*", "https://*.reddit.com/*"],
+      "js": ["content.js"],
+      "css": ["styles.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  }
+}
